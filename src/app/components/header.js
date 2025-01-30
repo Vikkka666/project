@@ -1,7 +1,10 @@
+import Link from 'next/link';
+
 export default function Header() {
     return (
-        <div className="bg-[#f2f2f2] flex justify-around px-[20px] w-full py-[25px] shadow-md">
-            <button className="hover:text-gray-300 transition duration-300">
+        <div className="flex px-[20px] w-full py-[25px]">
+            <Link href="/" passHref>
+            <button className="bg-[#D8A876] rounded-lg w-[35px] pl-[5px] text-white hover:text-gray-300 transition duration-300">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -17,25 +20,12 @@ export default function Header() {
                     />
                 </svg>
             </button>
-
+</Link>
            
-            <h1 className="text-2xl font-bold">Title</h1>
+            <h1 className="text-2xl ml-4">ФОТО ВЫСТАВКА</h1>
 
             
-            <div className="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 border-black shadow-md">
-                <svg
-                    className="absolute w-12 h-12 text-gray-400 -left-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        fillRule="evenodd" 
-                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                        clipRule="evenodd" 
-                    />
-                </svg>
-            </div>
+            
         </div>
     );
 }
