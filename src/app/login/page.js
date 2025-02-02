@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Header from "../components/header";
 
 export default function Login() {
@@ -6,25 +7,40 @@ export default function Login() {
       <Header />
       <div className="bg-[#1E1E1E] w-full h-[1000px] min-h-screen flex">
         <div className="flex-1 p-10 flex flex-col justify-center">
-          <p className="text-white text-4xl font-bold mb-4">Добро пожаловать!</p>
-          <p className="text-white text-lg mb-8">Доступ к миллионам изображений за пару кликов</p>
+          <p className="text-white text-[65px] font-bold mb-4">Добро пожаловать!</p>
+          <p className="text-white text-[22px] font-sans mb-8">Доступ к миллионам изображений за пару кликов</p>
 
           <form className="max-w-md">
             <input
               type="text"
               placeholder="Email"
-              className="w-full p-3 mb-4 bg-transparent border border-[#CDA274] rounded-lg text-[#CDA274] placeholder-[#CDA274] focus:outline-none focus:border-[#CDA274]"
-            />
+              className="w-full p-3 mb-4 font-sans bg-transparent border border-t-transparent border-l-transparent border-r-transparent border-b-white rounded-lg text-[#CDA274] placeholder-[#CDA274] text-[30px] placeholder-[30px]  focus:outline-none focus:border-b-[#CDA274]"
+              />
             <input
               type="password"
               placeholder="Password"
-              className="w-full p-3 mb-6 bg-transparent border border-[#CDA274] rounded-lg text-[#CDA274] placeholder-[#CDA274] focus:outline-none focus:border-[#CDA274]"
+              className="w-full p-3 mb-6 font-sans bg-transparent border border-t-transparent border-l-transparent border-r-transparent border-b-white rounded-lg text-[#CDA274] placeholder-[#CDA274] text-[30px] placeholder-[30px] focus:outline-none focus:border-b-[#CDA274]"
             />
+            <Link href='/registration'><p className="text-white text-[22px] font-sans mb-[10px]">Еще нет учетной записи?</p></Link>
             <button
               type="submit"
-              className="w-full bg-[#CDA274] text-white p-3 rounded-lg hover:bg-[#B88E5F] transition-colors"
+              className="pl-[80px] flex items-center shadow-lg shadow-[#C0C0C059] w-[250px] h-[65px] mt-[50px] bg-[#CDA274] font-sans text-white text-[18px] p-3 rounded-[18px] hover:bg-[#B88E5F] transition-colors"
             >
               Войти
+              <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 transform scale-x-[-1]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
             </button>
           </form>
         </div>

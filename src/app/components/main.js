@@ -17,9 +17,9 @@ export default function Main() {
   Присоединяйтесь к тысячам креативных людей, которые уже нашли всё необходимое для своих проектов.
   </p>
 
-  <div className="absolute left-[200px] transform -translate-x-1/2 top-[500px] bg-white flex justify-around rounded-lg w-[300px] h-[60px]">
+  <div className="absolute left-[200px] transform -translate-x-1/2 top-[500px] bg-white flex justify-around rounded-[10px] w-[275px] h-[60px] p-[5px] ">
   <Link href="/registration" passHref>
-          <button className="w-[130px] h-[50px] flex items-center bg-[#D8A876] rounded-lg text-white hover:text-gray-700 mt-[5px] p-[10px]">
+          <button className="w-[130px] h-[50px] flex items-center bg-[#D8A876] rounded-[10px] text-white hover:text-gray-700 p-[10px]">
             Регистрация
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@ export default function Main() {
           </button>
           </Link>
           <Link href="/login" passHref>
-          <button className="w-[130px] h-[50px] flex items-center bg-[#D8A876] rounded-lg  text-white hover:text-gray-700 mt-[5px] p-[10px]">
+          <button className="w-[130px] h-[50px] flex items-center bg-[#D8A876] rounded-[10px] ml-[5px]  text-white hover:text-gray-700 p-[10px]">
             Вход 
             <svg
               xmlns="http://www.w3.org/2000/svg"

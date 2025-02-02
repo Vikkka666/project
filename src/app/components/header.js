@@ -1,10 +1,11 @@
 import Link from 'next/link';
 
-export default function Header() {
+export default function Header({children}) {
     return (
-        <div className="flex px-[20px] w-full py-[25px]">
+            <div className='flex flex-wrap'>
+            <div  className="flex item-center px-[20px]">
             <Link href="/" passHref>
-            <button className="bg-[#D8A876] rounded-lg w-[35px] pl-[5px] text-white hover:text-gray-300 transition duration-300">
+            <button className="bg-[#D8A876] rounded-[15px] w-[40px] h-[40px] pl-[5px] text-white hover:text-gray-300 transition duration-300 m-8">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
@@ -22,9 +23,11 @@ export default function Header() {
             </button>
 </Link>
            
-            <h1 className="text-2xl ml-4">ФОТО ВЫСТАВКА</h1>
+          <Link href="/image">  <h1 className="text-[40px] mt-[5px] p-5">ФОТО ВЫСТАВКА</h1> </Link>
 
-            
+          </div>
+          
+            {children}
             
         </div>
     );
