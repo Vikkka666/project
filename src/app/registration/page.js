@@ -1,16 +1,13 @@
 "use client";
 import { useState } from "react";
 import Header from "../components/header";
-import useUserStore from "../store/userStore";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState(""); // Состояние для повторного пароля
-  const addUsers = useUserStore((state) => state.addUsers);
-  const router = useRouter();
+  const [registrationMessage, setRegistrationMessage] = useState(""); // Состояние для сообщения о регистрации
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -21,18 +18,37 @@ export default function Registration() {
   };
 
   const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value); // Обработчик для повторного пароля
+    setConfirmPassword(e.target.value);
   };
 
-  const addUser = (e) => {
+  const addUser = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Пароли не совпадают!"); // Проверка на совпадение паролей
       return;
     }
-    addUsers({ email: email, password: password, id: Math.random() * 100 });
-    clear();
-    router.push("/userProfile");
+
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Ошибка регистрации');
+      }
+
+      // Успешная регистрация, сохраним сообщение
+      setRegistrationMessage(`Пользователь успешно зарегистрирован с email: ${email}`);
+      clear();
+    } catch (error) {
+      console.error('Ошибка:', error);
+      alert('Ошибка регистрации: ' + error.message);
+    }
   };
 
   const clear = () => {
@@ -46,32 +62,32 @@ export default function Registration() {
       <Header />
       <div className="bg-[#1E1E1E] w-full h-[1000px] min-h-screen flex">
         <div className="flex-1 p-10 flex flex-col justify-center">
-          <p className="text-white  text-[65px] font-bold mb-4">Добро пожаловать!</p>
+          <p className="text-white text-[65px] font-bold mb-4">Добро пожаловать!</p>
           <p className="text-white text-[22px] font-sans mb-8">Доступ к миллионам изображений за пару кликов</p>
 
           <form className="max-w-md" onSubmit={addUser}>
             <input
               type="text"
               placeholder="Email"
-              className="w-full p-3 mb-4 font-sans bg-transparent border border-t-transparent border-l-transparent border-r-transparent border-b-white rounded-lg text-[#CDA274] placeholder-[#CDA274] text-[30px] placeholder-[30px]  focus:outline-none focus:border-b-[#CDA274]"
+              className="w-full p-3 mb-4 font-sans bg-transparent border border-t-transparent border-l-transparent border-r-transparent border-b-white rounded-lg text-[#CDA274] placeholder-[#CDA274] text-[30px] placeholder-[30px] focus:outline-none focus:border-b-[#CDA274]"
               onChange={handleEmailChange}
               value={email}
             />
             <input
               type="password"
               placeholder="Пароль"
-              className="w-full p-3 mb-4 font-sans bg-transparent border border-t-transparent border-l-transparent border-r-transparent border-b-white rounded-lg text-[#CDA274] placeholder-[#CDA274] text-[30px] placeholder-[30px]  focus:outline-none focus:border-b-[#CDA274]"
+              className="w-full p-3 mb-4 font-sans bg-transparent border border-t-transparent border-l-transparent border-r-transparent border-b-white rounded-lg text-[#CDA274] placeholder-[#CDA274] text-[30px] placeholder-[30px] focus:outline-none focus:border-b-[#CDA274]"
               onChange={handlePasswordChange}
               value={password}
             />
             <input
               type="password"
               placeholder="Повторите пароль"
-              className="w-full p-3 mb-6 font-sans bg-transparent border border-t-transparent border-l-transparent border-r-transparent border-b-white rounded-lg text-[#CDA274] placeholder-[#CDA274] text-[30px] placeholder-[30px]  focus:outline-none focus:border-b-[#CDA274]"
+              className="w-full p-3 mb-6 font-sans bg-transparent border border-t-transparent border-l-transparent border-r-transparent border-b-white rounded-lg text-[#CDA274] placeholder-[#CDA274] text-[30px] placeholder-[30px] focus:outline-none focus:border-b-[#CDA274]"
               onChange={handleConfirmPasswordChange}
               value={confirmPassword}
             />
-              <Link href='/login'><p className="text-white text-[22px] font-sans mb-[10px]">Уже есть учетная запись?</p></Link>
+            <Link href='/login'><p className="text-white text-[22px] font-sans mb-[10px]">Уже есть учетная запись?</p></Link>
 
             <button
               type="submit"
@@ -79,21 +95,25 @@ export default function Registration() {
             >
               Регистрация
               <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 transform scale-x-[-1]"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 transform scale-x-[-1]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
             </button>
           </form>
+          
+          {registrationMessage && (
+            <p className="mt-4 text-white text-lg">{registrationMessage}</p>
+          )}
         </div>
 
         <div className="flex-1 overflow-hidden mt-[50px]"> 

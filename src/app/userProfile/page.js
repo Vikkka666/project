@@ -1,19 +1,29 @@
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Header from "../components/header";
 import Link from 'next/link';
 
-
 export default function userProfile(){
+  const router = useRouter();
+
+  useEffect(() => {
+      const token = localStorage.getItem('token'); 
+      if (!token) {
+          router.push('/login'); 
+      }
+  }, [router]);
     return (
-        <div>
+        <div className="bg-white">
            <Header>
            <div className="flex ml-[400px] justify-end p-8 ">
-                <Link href="/"><p className="mt-[10px]  text-[20px] font-sans font-bold">Главная</p></Link>
-                <Link href='/userProfile'><p className="ml-[40px] mt-[10px] text-[20px] font-sans font-bold">Профиль</p></Link>
+                <Link href="/"><p className="mt-[10px]  text-[20px] font-sans font-bold text-black">Главная</p></Link>
+                <Link href='/userProfile'><p className="ml-[40px] mt-[10px] text-[20px] font-sans font-bold text-black">Профиль</p></Link>
             </div>
            </Header>
            <div className="flex flex-wrap justify-around">
             <form className="mt-[200px] max-w-md">
-                <h1 className="text-[60px] mb-[20px] font-sans">Смена пароля</h1>
+                <h1 className="text-[60px] mb-[20px] font-sans text-black">Смена пароля</h1>
                 <hr className="mb-[40px] border-b border-black w-full" />
             <input
               type="password"
