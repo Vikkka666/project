@@ -34,9 +34,9 @@ export default function Login() {
         throw new Error(errorData.message || 'Ошибка входа');
       }
 
-      // Если авторизация успешна, сохраняем токен в localStorage
+   
       const data = await response.json();
-      localStorage.setItem('token', data.token); // Сохранение токена
+      localStorage.setItem('token', data.token); 
       alert("Пользователь успешно авторизован!");
       router.push("/userProfile");
     } catch (error) {

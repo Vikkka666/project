@@ -5,9 +5,9 @@ import { useState, useEffect } from "react";
 
 export default function Image() {
     const [photos, setPhotos] = useState([]);
-    const [collections, setCollections] = useState([]); // Состояние для коллекций
+    const [collections, setCollections] = useState([]); 
     const [searchQuery, setSearchQuery] = useState("");
-    const ACCESS_KEY = "cBa1Z47-NA56t_o4HWyzEwT69Fi-mTLHH91eLeniU1M"; // Замените на ваш ключ доступа
+    const ACCESS_KEY = "cBa1Z47-NA56t_o4HWyzEwT69Fi-mTLHH91eLeniU1M"; 
 
     const searchPhotos = async (query) => {
         if (!query) return; 
@@ -88,7 +88,7 @@ export default function Image() {
                 ))}
             </div>
 
-            {!searchQuery && ( // Проверяем, если searchQuery пустой
+            {!searchQuery && ( 
                 <div className="flex flex-wrap justify-around gap-5 mt-[80px] ml-[50px] mr-[50px]">
                     {collections.slice(0, 4).map(collection => ( 
                         <div key={collection.id} className="flex flex-col items-center">
