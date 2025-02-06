@@ -6,8 +6,7 @@ import Link from "next/link";
 export default function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState(""); // Состояние для повторного пароля
-  const [registrationMessage, setRegistrationMessage] = useState(""); // Состояние для сообщения о регистрации
+  const [confirmPassword, setConfirmPassword] = useState(""); 
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -24,7 +23,7 @@ export default function Registration() {
   const addUser = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert("Пароли не совпадают!"); // Проверка на совпадение паролей
+      alert("Пароли не совпадают!"); 
       return;
     }
 
@@ -42,8 +41,7 @@ export default function Registration() {
         throw new Error(errorData.message || 'Ошибка регистрации');
       }
 
-      // Успешная регистрация, сохраним сообщение
-      setRegistrationMessage(`Пользователь успешно зарегистрирован с email: ${email}`);
+     
       clear();
     } catch (error) {
       console.error('Ошибка:', error);
@@ -54,7 +52,7 @@ export default function Registration() {
   const clear = () => {
     setEmail("");
     setPassword("");
-    setConfirmPassword(""); // Очищаем поле повторного ввода пароля
+    setConfirmPassword(""); 
   };
 
   return (
@@ -111,9 +109,7 @@ export default function Registration() {
             </button>
           </form>
           
-          {registrationMessage && (
-            <p className="mt-4 text-white text-lg">{registrationMessage}</p>
-          )}
+          
         </div>
 
         <div className="flex-1 overflow-hidden mt-[50px]"> 

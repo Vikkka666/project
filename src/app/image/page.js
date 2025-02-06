@@ -2,13 +2,22 @@
 import Link from "next/link";
 import Header from "../components/header";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Image() {
     const [photos, setPhotos] = useState([]);
     const [collections, setCollections] = useState([]); 
     const [searchQuery, setSearchQuery] = useState("");
-    const ACCESS_KEY = "cBa1Z47-NA56t_o4HWyzEwT69Fi-mTLHH91eLeniU1M"; 
+    const ACCESS_KEY = process.env.NEXT_PUBLIC_ACCESS_KEY; 
+    const router = useRouter();
 
+    useEffect(() => {
+        const token = localStorage.getItem('token'); 
+        if (!token) {
+            router.push('/login'); 
+        }
+    }, [router]);
+    
     const searchPhotos = async (query) => {
         if (!query) return; 
         try {

@@ -37,7 +37,6 @@ export default function Login() {
    
       const data = await response.json();
       localStorage.setItem('token', data.token); 
-      alert("Пользователь успешно авторизован!");
       router.push("/userProfile");
     } catch (error) {
       console.error('Ошибка:', error);

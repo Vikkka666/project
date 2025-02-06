@@ -1,5 +1,3 @@
-
-
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
@@ -16,21 +14,21 @@ export async function POST(req) {
   });
 
   if (!user) {
-    return NextResponse.json({ message: 'Пользователь не найден.' }, { status: 400 });
+    return NextResponse.json({ message: 'Не удалось зайти на аккаунт' }, { status: 400 });
   }
 
   const passwordMatch = await bcrypt.compare(password, user.password);
   if (!passwordMatch) {
-    return NextResponse.json({ message: 'Неверный пароль.' }, { status: 400 });
+    return NextResponse.json({ message: 'Не удалось зайти на аккаунт' }, { status: 400 });
   }
 
  
-  const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
+  const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY);
 
   return NextResponse.json({ id: user.id, email: user.email, token }, { status: 200 });
 }
 
-export const config = {
+export const config = { 
   api: {
     bodyParser: true,
   },
